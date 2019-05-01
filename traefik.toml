@@ -1,5 +1,6 @@
-debug = false
-logLevel = "ERROR"
+debug = true
+
+logLevel = "INFO"
 
 defaultEntryPoints = ["http", "https"]
 
@@ -8,28 +9,31 @@ defaultEntryPoints = ["http", "https"]
 address = ":8080"
 
 [entryPoints]
-    [entryPoints.http]
-    address = ":80"
-        [entryPoints.http.redirect]
-        entryPoint = "https"
+  [entryPoints.http]
+  address = ":80" 
+    [entryPoints.http.redirect]
+    entryPoint = "https"
 
-    [entryPoints.https]
-    address = ":443"
-    [entryPoints.https.tls]
+  [entryPoints.https]
+  address = ":443"
+  [entryPoints.https.tls]
 
 [retry]
 
 [acme]
-email = "fredrickmyrvoll@gmail.com"
-caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+email = "your@email.com"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
   [acme.httpChallenge]
   entryPoint = "http"
 
+  [[acme.domains]]
+    main = "yourdomain.no"
+    sans = ["subdomain.yourdomain.no","subdomain.yourdomain.no"]
+
 [docker]
 endpoint = "unix:///var/run/docker.sock"
-domain = "fmlab.no"
+domain = "yourdomain"
 watch = true
 exposedByDefault = false

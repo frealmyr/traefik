@@ -2,14 +2,14 @@ version: '3.5'
 
 services:
   traefik:
-    image: traefik:1.7 # The official Traefik docker image
+    image: traefik:1.7
     restart: always
     ports:
-      - "80:80"     # The HTTP port
-      - "443:443" # The Web UI (enabled by --api)
-      - "8080:8080"
+      - "80:80"      # The HTTP port
+      - "443:443"    # The HTTPS
+      - "8080:8080"  # The Traefik Web UI
     networks:
-      - web
+      - web          # The network that docker containers will use for reverse proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik.toml:/traefik.toml
@@ -17,4 +17,4 @@ services:
 
 networks:
   web:
-    external: true
+    external: true   # Must be generated manually with 'docker network create web'    
