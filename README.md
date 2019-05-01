@@ -1,5 +1,6 @@
 # traefik-host
-A simple configuration for running Traefik as a reverse proxy in a home lab. 
+A simple configuration for running Traefik as a reverse proxy for other docker containers in a home lab. 
+Also gives the benefit of easy setup and automatic renewal of Let's Encrypt certificates, for both domain and subdomains.
 
 
 ### Prerequisite:
