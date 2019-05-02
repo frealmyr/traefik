@@ -54,14 +54,14 @@ services:
       - ${PUBLIC_HTML}/:/var/www/html/                                                                                                                                                                         
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf                                                                                                                                             
     depends_on:                                                                                                                                                                                                
-      - php                                                                                                                                                                                                    
+      - php                                                                                                                                                                            
     container_name: nginx                                                                                                                                                                                  
     labels:                                                                                                                                                                                                    
-      - traefik.enable=true                                                                                                                                                                                    
-      - traefik.backend=subdomain                                                                                                                                                                              
-      - traefik.frontend.rule=Host:subdomain.yourdomain.com                                                                                                                                                          
-      - traefik.docker.network=web                                                                                                                                                                             
-      - traefik.port=80                                                                                                                                                                                        
+      - traefik.enable=true               # Enable Traefik for this container                                                                                                                                                                                    
+      - traefik.backend=subdomain         # (Optional) Describe the backend for Traefik                                                                                                                                                                          
+      - traefik.frontend.rule=Host:subdomain.yourdomain.com  # The FQDN                                                                                                                                                         
+      - traefik.docker.network=web        # The network used for Traefik reverse proxy                                                                                                                                                                           
+      - traefik.port=80                   # The port you wish to forward to Traefik                                                                                                                                                                           
                                                                                                                                                                                                                                                                                                                                                                                                        
   php:                                                                                                                                                                                                         
     build:                                                                                                                                                                                                     
@@ -74,4 +74,4 @@ services:
       - ${PUBLIC_HTML}/:/var/www/html/
     container_name: php
     labels:
-      - traefik.enable=false
+      - traefik.enable=false        # Disable Traefik, since this is a container for backend stuff
